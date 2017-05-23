@@ -33,7 +33,8 @@ while True:
 
     counts = tree.findall('.//count')
     print('User count:', len(counts))
+    print(counts)
 
-    for count in counts:
+    #for count in counts:
         #print('Name:', item.find('name').text)
-        print('Count:', count.find('count').text)
+        #print('Count:', count.find('count').text)
