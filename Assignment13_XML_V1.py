@@ -8,7 +8,7 @@ Sample data: http://python-data.dr-chuck.net/comments_42.xml (Sum=2553)
 
 Python for Everyone, Ch. 13, Assignment #1
 
-Version 1.0, Developed by Kyle DuBois.'''
+Version 2.0, Developed by Kyle DuBois.'''
 
 import urllib.request, urllib.parse, urllib.error
 import xml.etree.ElementTree as ET
@@ -17,24 +17,30 @@ numList = list()
 
 while True:
     address = input('Enter location: ')
-    if len(address) < 1:
-        break
 
     print('Retrieving', address)
 
     url = urllib.request.urlopen(address)
-    #print('Retrieving', url)
-    #uh = urllib.urlopen(url)
     data = url.read()
     print('Retrieved',len(data),'characters')
-    #print(data)
+
+    # this section parses through an XML tree to find user comment counts
     tree = ET.fromstring(data)
-
-
-    counts = tree.findall('.//count')
+    counts = tree.findall('comments/comment')
     print('User count:', len(counts))
-    print(counts)
 
-    #for count in counts:
-        #print('Name:', item.find('name').text)
-        #print('Count:', count.find('count').text)
+    # this section creates a list of XML.elements
+    for item in counts:
+        count = item.find('count').text
+        numList.append(count)
+
+    # this section runs the the XML.elem list and creates a new list of integers
+    nunuList = list()
+    for num in numList:
+        #converst into integer
+        newNum = int(num)
+        nunuList.append(newNum)
+
+    tot = sum(nunuList)
+    print(tot)
+    break
