@@ -7,7 +7,7 @@ compute the sum of the numbers in the file
 
 Sample data: http://python-data.dr-chuck.net/comments_42.json (Sum=2553)
 
-Python for Everyone, Ch. 13, Assignment #2, using JSON
+Assignment #2, using JSON
 
 Developed by Kyle DuBois, Version 1.0 '''
 
@@ -22,26 +22,28 @@ while True:
         break
 
     print('Retrieving', address)
+    
+    # This section opens the URL and parses through JSON data
     url = urllib.request.urlopen(address)
     data = url.read().decode()
     headers = dict(url.getheaders())
     print('Retrieved', len(data),'characters')
-    # this section parses through an JSON to find user comment counts
     info = json.loads(data)
 
     #print(json.dumps(info, indent=4))
-    # this section extracts the counts numbers for JSON and creates a list
+    
+    # This section looks for and extracts the count numbers from the JSON data and creates a list
     for u in info["comments"]:
         #print(u['count'])
         numList.append(u['count'])
 
-    # this section runs the the list and creates a new list of integers
+    # This section runs through the list and creates a new list of integers
     nunuList = list()
     for num in numList:
-        # This seciions converst into integer
         newNum = int(num)
         nunuList.append(newNum)
-    # This section sums all the numbers
+        
+    # This section sums all the integers and prints the total
     tot = sum(nunuList)
     print(tot)
     break
